@@ -1,6 +1,6 @@
 //Maya ASCII 2017ff05 scene
-//Name: UkJolieLegStart.ma
-//Last modified: Sat, Oct 21, 2017 04:21:09 PM
+//Name: UkJolieLegIKFKOrientConstrain.ma
+//Last modified: Sat, Oct 21, 2017 04:21:41 PM
 //Codeset: 1252
 requires maya "2017ff05";
 requires "stereoCamera" "10.0";
@@ -766,4 +766,4 @@ connectAttr "LeftFootPinkieToeNub_IK.msg" ":hyperGraphLayout.hyp[310].dn";
 connectAttr "ThighLeft_orientConstraint1.msg" ":hyperGraphLayout.hyp[311].dn";
 connectAttr "KneeLeft_orientConstraint1.msg" ":hyperGraphLayout.hyp[312].dn";
 connectAttr "HeelLeft_orientConstraint1.msg" ":hyperGraphLayout.hyp[313].dn";
-// End of UkJolieLegStart.ma
+// End of UkJolieLegIKFKOrientConstrain.ma
