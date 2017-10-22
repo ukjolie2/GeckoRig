@@ -1,6 +1,6 @@
 //Maya ASCII 2017ff05 scene
 //Name: UkJolieIK2FK.ma
-//Last modified: Sun, Oct 22, 2017 11:25:48 AM
+//Last modified: Sun, Oct 22, 2017 11:28:57 AM
 //Codeset: 1252
 requires maya "2017ff05";
 requires "stereoCamera" "10.0";
@@ -15,8 +15,8 @@ fileInfo "license" "student";
 createNode transform -s -n "persp";
 	rename -uid "3B13F8F4-40BB-F30E-8D95-36B9E32BCDC6";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" -5.9819660145159101 13.610562868515622 34.415027821749121 ;
-	setAttr ".r" -type "double3" -5.7383527267368093 -1439.7999999995061 -4.5037425634602923e-017 ;
+	setAttr ".t" -type "double3" -34.063262832949704 16.547380660773186 19.933721615553406 ;
+	setAttr ".r" -type "double3" -10.538352726844764 -1493.3999999999692 1.3336221009080826e-015 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "59622E65-4B01-AD8B-F72A-CAB3D186777E";
 	setAttr -k off ".v" no;
@@ -664,7 +664,9 @@ createNode nurbsCurve -n "IKFK_ControlShape" -p "IKFK_Control";
 	rename -uid "3C52E967-4B45-57EB-932E-1D9A23DD904F";
 	setAttr -k off ".v";
 	setAttr ".tw" yes;
-createNode transform -n "ShoulderController_FK_null";
+createNode transform -n "FK_Controls";
+	rename -uid "87C8FFF3-4FB5-DC52-C6F5-2C8CB4003678";
+createNode transform -n "ShoulderController_FK_null" -p "FK_Controls";
 	rename -uid "D24268EB-4DD5-0CE5-D3FF-2B8C352A0C81";
 	setAttr ".t" -type "double3" -12.004581451416016 6.500981330871582 -1.0086410045623779 ;
 	setAttr ".r" -type "double3" 0.028897905396702978 -1.227372044196712 -1.34885659700495 ;
@@ -711,10 +713,10 @@ createNode poseInterpolatorManager -n "poseInterpolatorManager";
 	rename -uid "50058AB7-450C-BFC9-5711-4A942A343168";
 createNode displayLayerManager -n "layerManager";
 	rename -uid "74FA595C-4B01-BF4B-262D-ADB8E8558318";
-	setAttr ".cdl" 12;
-	setAttr -s 13 ".dli[1:12]"  1 3 4 7 2 5 6 8 
-		9 10 11 12;
-	setAttr -s 5 ".dli";
+	setAttr ".cdl" 13;
+	setAttr -s 14 ".dli[1:13]"  1 3 4 7 2 5 6 8 
+		9 10 11 12 13;
+	setAttr -s 6 ".dli";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "5A234992-439F-D141-FC89-E9BBACF245FA";
 createNode renderLayerManager -n "renderLayerManager";
@@ -777,7 +779,7 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"timeEditorPanel\" (localizedPanelLabel(\"Time Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Time Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n"
 		+ "                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"sequenceEditorPanel\" (localizedPanelLabel(\"Camera Sequencer\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n"
 		+ "                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n                -mergeConnections 0\n                -zoom 0.514263\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n"
-		+ "                -transitionFrames 5\n                -currentNode \"ShoulderController_FK_null\" \n                -opaqueContainers 0\n                -dropTargetNode \"ShoulderController_FK\" \n                -dropNode \"ForearmController_FK_null\" \n                -freeform 1\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"largeIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperShadePanel\" (localizedPanelLabel(\"Hypershade\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypershade\")) -mbv $menusOkayInPanels  $panelName;\n"
+		+ "                -transitionFrames 5\n                -currentNode \"ShoulderController_FK_null\" \n                -opaqueContainers 0\n                -dropTargetNode \"FK_Controls\" \n                -dropNode \"ShoulderController_FK_null\" \n                -freeform 1\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"largeIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperShadePanel\" (localizedPanelLabel(\"Hypershade\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypershade\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"visorPanel\" (localizedPanelLabel(\"Visor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Visor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"nodeEditorPanel\" (localizedPanelLabel(\"Node Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Node Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"NodeEditorEd\");\n            nodeEditor -e \n                -allAttributes 0\n                -allNodes 0\n                -autoSizeNodes 1\n                -consistentNameSize 1\n                -createNodeCommand \"nodeEdCreateNodeCommand\" \n                -defaultPinnedState 0\n                -additiveGraphingMode 0\n"
 		+ "                -settingsChangedCallback \"nodeEdSyncControls\" \n                -traversalDepthLimit -1\n                -keyPressCommand \"nodeEdKeyPressCommand\" \n                -nodeTitleMode \"name\" \n                -gridSnap 0\n                -gridVisibility 1\n                -popupMenuScript \"nodeEdBuildPanelMenus\" \n                -showNamespace 1\n                -showShapes 1\n                -showSGShapes 0\n                -showTransforms 1\n                -useAssets 1\n                -syncedSelection 1\n                -extendToShapes 1\n                -activeTab 0\n                -editorMode \"default\" \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"createNodePanel\" (localizedPanelLabel(\"Create Node\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
 		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"polyTexturePlacementPanel\" (localizedPanelLabel(\"UV Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"UV Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"renderWindowPanel\" (localizedPanelLabel(\"Render View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
@@ -881,13 +883,17 @@ createNode transformGeometry -n "transformGeometry6";
 	setAttr ".txf" -type "matrix" 0.0084337322249755653 -0.99975919063349439 -0.020259143728639517 0
 		 0.99907652752668974 0.0092780991049917771 -0.041952461455906649 0 0.042130325253536681 -0.019886619140975566 0.9989141895444138 0
 		 0 8.8817841970012523e-016 0 1;
+createNode displayLayer -n "FK_Controllers";
+	rename -uid "0F62E000-460D-94D6-01E9-49B20EF5E2DF";
+	setAttr ".c" 14;
+	setAttr ".do" 5;
 createNode nodeGraphEditorInfo -n "MayaNodeEditorSavedTabsInfo";
-	rename -uid "DB026F39-4311-BF0A-67C3-4BBD45C7B19E";
+	rename -uid "21D4C183-413D-F0D9-A662-CA93A1D2723C";
 	setAttr ".pee" yes;
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
 	setAttr ".tgi[0].vl" -type "double2" -9010.4719028994205 1850.6034255464576 ;
 	setAttr ".tgi[0].vh" -type "double2" -5903.8720518255877 3298.2693530561342 ;
-	setAttr -s 28 ".tgi[0].ni";
+	setAttr -s 30 ".tgi[0].ni";
 	setAttr ".tgi[0].ni[0].x" -7347.876953125;
 	setAttr ".tgi[0].ni[0].y" 2357.83642578125;
 	setAttr ".tgi[0].ni[0].nvs" 18314;
@@ -972,6 +978,12 @@ createNode nodeGraphEditorInfo -n "MayaNodeEditorSavedTabsInfo";
 	setAttr ".tgi[0].ni[27].x" -6505.71435546875;
 	setAttr ".tgi[0].ni[27].y" 2985.71435546875;
 	setAttr ".tgi[0].ni[27].nvs" 18304;
+	setAttr ".tgi[0].ni[28].x" -8118.5712890625;
+	setAttr ".tgi[0].ni[28].y" 2181.428466796875;
+	setAttr ".tgi[0].ni[28].nvs" 18304;
+	setAttr ".tgi[0].ni[29].x" -8274.2861328125;
+	setAttr ".tgi[0].ni[29].y" 2010;
+	setAttr ".tgi[0].ni[29].nvs" 18304;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -1005,7 +1017,7 @@ select -ne :hardwareRenderGlobals;
 select -ne :ikSystem;
 	setAttr -s 4 ".sol";
 select -ne :hyperGraphLayout;
-	setAttr -s 179 ".hyp";
+	setAttr -s 180 ".hyp";
 	setAttr ".hyp[291].x" 656.0347900390625;
 	setAttr ".hyp[291].y" -252.50569152832031;
 	setAttr ".hyp[291].isf" yes;
@@ -1204,27 +1216,30 @@ select -ne :hyperGraphLayout;
 	setAttr ".hyp[368].x" 890.27069091796875;
 	setAttr ".hyp[368].y" -304.02420043945313;
 	setAttr ".hyp[368].isf" yes;
-	setAttr ".hyp[374].x" -507.10336303710937;
-	setAttr ".hyp[374].y" -377.89511108398437;
+	setAttr ".hyp[374].x" -572.0972900390625;
+	setAttr ".hyp[374].y" -393.73324584960937;
 	setAttr ".hyp[374].isf" yes;
-	setAttr ".hyp[376].x" -488.61404418945312;
-	setAttr ".hyp[376].y" -445.59725952148437;
+	setAttr ".hyp[376].x" -553.6080322265625;
+	setAttr ".hyp[376].y" -461.43539428710937;
 	setAttr ".hyp[376].isf" yes;
-	setAttr ".hyp[377].x" -490.50247192382812;
-	setAttr ".hyp[377].y" -236.90728759765625;
+	setAttr ".hyp[377].x" -555.4964599609375;
+	setAttr ".hyp[377].y" -252.74542236328125;
 	setAttr ".hyp[377].isf" yes;
-	setAttr ".hyp[378].x" -493.94451904296875;
-	setAttr ".hyp[378].y" -303;
+	setAttr ".hyp[378].x" -558.9384765625;
+	setAttr ".hyp[378].y" -318.838134765625;
 	setAttr ".hyp[378].isf" yes;
-	setAttr ".hyp[380].x" -484.06304931640625;
-	setAttr ".hyp[380].y" -109.55016326904297;
+	setAttr ".hyp[380].x" -549.0570068359375;
+	setAttr ".hyp[380].y" -125.38829803466797;
 	setAttr ".hyp[380].isf" yes;
-	setAttr ".hyp[381].x" -486.1185302734375;
-	setAttr ".hyp[381].y" -174.10488891601562;
+	setAttr ".hyp[381].x" -551.11248779296875;
+	setAttr ".hyp[381].y" -189.94302368164062;
 	setAttr ".hyp[381].isf" yes;
 	setAttr ".hyp[383].x" -258.73324584960937;
 	setAttr ".hyp[383].y" -412.50076293945313;
 	setAttr ".hyp[383].isf" yes;
+	setAttr ".hyp[384].x" -553.0570068359375;
+	setAttr ".hyp[384].y" -48.112457275390625;
+	setAttr ".hyp[384].isf" yes;
 connectAttr "ClavicalLeft.s" "ShoulderLeft.is";
 connectAttr "Bindskeleton.di" "ShoulderLeft.do";
 connectAttr "ShoulderLeft_orientConstraint.crx" "ShoulderLeft.rx";
@@ -1433,6 +1448,7 @@ connectAttr "ThumbLeftTip_IK.s" "LeftThumbNub_IK.is";
 connectAttr "IK_Arm.di" "LeftThumbNub_IK.do";
 connectAttr "Controllers.di" "IKFK_Control.do";
 connectAttr "transformGeometry2.og" "IKFK_ControlShape.cr";
+connectAttr "FK_Controllers.di" "ShoulderController_FK_null.do";
 connectAttr "transformGeometry5.og" "ShoulderController_FKShape.cr";
 connectAttr "transformGeometry6.og" "ForearmController_FKShape.cr";
 connectAttr "transformGeometry4.og" "HandController_FKShape.cr";
@@ -1456,6 +1472,7 @@ connectAttr "makeNurbCircle2.oc" "transformGeometry3.ig";
 connectAttr "transformGeometry3.og" "transformGeometry4.ig";
 connectAttr "makeNurbCircle4.oc" "transformGeometry5.ig";
 connectAttr "makeNurbCircle3.oc" "transformGeometry6.ig";
+connectAttr "layerManager.dli[13]" "FK_Controllers.id";
 connectAttr "HandLeft_orientConstraint.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
 		;
 connectAttr "ShoulderController_FK.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[1].dn"
@@ -1508,6 +1525,8 @@ connectAttr "HandController_FK.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[26].d
 		;
 connectAttr "HandController_FK_null.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[27].dn"
 		;
+connectAttr "FK_Controllers.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[28].dn";
+connectAttr "FK_Controls.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[29].dn";
 connectAttr "pasted__multiplyDivide_shoulderLeft1.msg" ":defaultRenderUtilityList1.u"
 		 -na;
 connectAttr "pasted__multiplyDivide_forearmLeft1.msg" ":defaultRenderUtilityList1.u"
@@ -1598,4 +1617,5 @@ connectAttr "ForearmController_FK.msg" ":hyperGraphLayout.hyp[378].dn";
 connectAttr "ShoulderController_FK_null.msg" ":hyperGraphLayout.hyp[380].dn";
 connectAttr "ShoulderController_FK.msg" ":hyperGraphLayout.hyp[381].dn";
 connectAttr "HandLeft_FK_orientConstraint1.msg" ":hyperGraphLayout.hyp[383].dn";
+connectAttr "FK_Controls.msg" ":hyperGraphLayout.hyp[384].dn";
 // End of UkJolieIK2FK.ma
