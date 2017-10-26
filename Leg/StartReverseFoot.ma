@@ -1,6 +1,6 @@
 //Maya ASCII 2017ff05 scene
 //Name: StartReverseFoot.ma
-//Last modified: Wed, Oct 25, 2017 11:35:02 PM
+//Last modified: Wed, Oct 25, 2017 11:43:41 PM
 //Codeset: 1252
 requires maya "2017ff05";
 requires "stereoCamera" "10.0";
@@ -15,13 +15,13 @@ fileInfo "license" "student";
 createNode transform -s -n "persp";
 	rename -uid "89E5C846-42E9-EA58-E2A5-308A8B8A8B0C";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 2.8653094783732769 12.661707635038251 58.061941276782306 ;
-	setAttr ".r" -type "double3" -11.138352729472448 0.99999999999997535 -1.1183340828996158e-016 ;
+	setAttr ".t" -type "double3" 38.334003876830153 8.7984699171092338 24.271634384819713 ;
+	setAttr ".r" -type "double3" -7.5383527294621224 72.599999999998516 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "D1705A1D-494B-5FD6-D620-80A9AB0F8A28";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 46.026360200823348;
+	setAttr ".coi" 38.326743592990042;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -464,9 +464,9 @@ createNode transform -n "FootControl";
 	addAttr -ci true -sn "Offset" -ln "Offset" -at "double";
 	addAttr -ci true -sn "standTIp" -ln "standTIp" -min 0 -max 10 -at "double";
 	addAttr -ci true -sn "PeelHeel" -ln "PeelHeel" -min 0 -max 10 -at "double";
-	addAttr -ci true -sn "TwistHeel" -ln "TwistHeel" -min -10 -max 10 -at "double";
-	addAttr -ci true -sn "TwistToes" -ln "TwistToes" -min -10 -max 10 -at "double";
-	addAttr -ci true -sn "ToeTap" -ln "ToeTap" -min -10 -max 10 -at "double";
+	addAttr -ci true -sn "TwistHeel" -ln "TwistHeel" -min -11 -max 10 -at "double";
+	addAttr -ci true -sn "TwistToes" -ln "TwistToes" -min -11 -max 10 -at "double";
+	addAttr -ci true -sn "ToeTap" -ln "ToeTap" -min -11 -max 10 -at "double";
 	setAttr ".rp" -type "double3" 5.9855294227600098 1.021811842918396 15.837507247924805 ;
 	setAttr ".sp" -type "double3" 5.9855294227600098 1.021811842918396 15.837507247924805 ;
 	setAttr -k on ".Knee";
@@ -615,8 +615,8 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "                -highlightSecondary 0\n                -showUVAttrsOnly 0\n                -showTextureNodesOnly 0\n                -attrAlphaOrder \"default\" \n                -animLayerFilterOptions \"allAffecting\" \n                -sortOrder \"none\" \n                -longNames 0\n                -niceNames 1\n                -showNamespace 1\n                -showPinIcons 0\n                -mapMotionTrails 1\n                -ignoreHiddenAttribute 0\n                -ignoreOutlinerColor 0\n                -renderFilterVisible 0\n                $editorName;\n\n\t\t\t$editorName = ($panelName+\"DopeSheetEd\");\n            dopeSheetEditor -e \n                -displayKeys 1\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"integer\" \n                -snapValue \"none\" \n                -outliner \"dopeSheetPanel1OutlineEd\" \n                -showSummary 1\n"
 		+ "                -showScene 0\n                -hierarchyBelow 0\n                -showTicks 1\n                -selectionWindow 0 0 0 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"timeEditorPanel\" (localizedPanelLabel(\"Time Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Time Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"clipEditorPanel\" (localizedPanelLabel(\"Trax Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Trax Editor\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = clipEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n"
 		+ "                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 0 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"sequenceEditorPanel\" (localizedPanelLabel(\"Camera Sequencer\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Camera Sequencer\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = sequenceEditorNameFromPanel($panelName);\n            clipEditor -e \n                -displayKeys 0\n                -displayTangents 0\n                -displayActiveKeys 0\n                -displayActiveKeyTangents 0\n                -displayInfinities 0\n                -displayValues 0\n                -autoFit 0\n                -snapTime \"none\" \n"
-		+ "                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n                -mergeConnections 0\n                -zoom 0.686672\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n"
-		+ "                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n                -transitionFrames 5\n                -currentNode \"ToePivotGroup\" \n                -opaqueContainers 0\n                -dropTargetNode \"Pelvis\" \n                -dropNode \"ThighLeft_IK\" \n                -freeform 1\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"largeIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"visorPanel\" (localizedPanelLabel(\"Visor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n"
+		+ "                -snapValue \"none\" \n                -initialized 0\n                -manageSequencer 1 \n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"hyperGraphPanel\" (localizedPanelLabel(\"Hypergraph Hierarchy\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Hypergraph Hierarchy\")) -mbv $menusOkayInPanels  $panelName;\n\n\t\t\t$editorName = ($panelName+\"HyperGraphEd\");\n            hyperGraph -e \n                -graphLayoutStyle \"hierarchicalLayout\" \n                -orientation \"horiz\" \n                -mergeConnections 0\n                -zoom 0.697607\n                -animateTransition 0\n                -showRelationships 1\n                -showShapes 0\n                -showDeformers 0\n                -showExpressions 0\n                -showConstraints 0\n                -showConnectionFromSelected 0\n                -showConnectionToSelected 0\n"
+		+ "                -showConstraintLabels 0\n                -showUnderworld 0\n                -showInvisible 0\n                -transitionFrames 5\n                -currentNode \"ToeTapGroup\" \n                -opaqueContainers 0\n                -dropTargetNode \"Pelvis\" \n                -dropNode \"ThighLeft_IK\" \n                -freeform 1\n                -imagePosition 0 0 \n                -imageScale 1\n                -imageEnabled 0\n                -graphType \"DAG\" \n                -heatMapDisplay 0\n                -updateSelection 1\n                -updateNodeAdded 1\n                -useDrawOverrideColor 0\n                -limitGraphTraversal -1\n                -range 0 0 \n                -iconSize \"largeIcons\" \n                -showCachedConnections 0\n                $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"visorPanel\" (localizedPanelLabel(\"Visor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n"
 		+ "\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Visor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"createNodePanel\" (localizedPanelLabel(\"Create Node\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Create Node\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"polyTexturePlacementPanel\" (localizedPanelLabel(\"UV Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"UV Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"renderWindowPanel\" (localizedPanelLabel(\"Render View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n"
 		+ "\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"componentEditorPanel\" (localizedPanelLabel(\"Component Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
@@ -720,16 +720,24 @@ createNode multiplyDivide -n "ToePivotMD";
 	setAttr ".i2" -type "float3" 4 4 1 ;
 createNode multiplyDivide -n "heelPivotMD";
 	rename -uid "8C62F952-4C68-0DE8-EFD3-C2A0EC967BB5";
+	setAttr ".i2" -type "float3" 4 1 1 ;
 createNode multiplyDivide -n "ToeTapMD";
 	rename -uid "79F86B75-4C69-0C2A-5835-03A41EE0B336";
+	setAttr ".i2" -type "float3" 4.5 1 1 ;
 createNode unitConversion -n "unitConversion3";
 	rename -uid "79E3624C-48B6-6621-2974-96AF5FB707C1";
 	setAttr ".cf" 0.017453292519943295;
 createNode unitConversion -n "unitConversion4";
 	rename -uid "D7E788AD-4309-EDB1-6920-25B5100E59C1";
 	setAttr ".cf" 0.017453292519943295;
+createNode unitConversion -n "unitConversion5";
+	rename -uid "C5F1BF74-4EB4-2D66-1701-BA9CE9E80A07";
+	setAttr ".cf" 0.017453292519943295;
+createNode unitConversion -n "unitConversion6";
+	rename -uid "78D9E13A-4F76-C27E-46E1-77BEF17AC7EA";
+	setAttr ".cf" 0.017453292519943295;
 createNode nodeGraphEditorInfo -n "MayaNodeEditorSavedTabsInfo";
-	rename -uid "A073DC1F-4410-790F-BD1F-72942EF6A13A";
+	rename -uid "4907701B-48B2-D345-D24B-B88ED12E976F";
 	setAttr ".pee" yes;
 	setAttr -s 3 ".tgi";
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
@@ -771,45 +779,51 @@ createNode nodeGraphEditorInfo -n "MayaNodeEditorSavedTabsInfo";
 	setAttr ".tgi[1].ni[3].y" -430.3902587890625;
 	setAttr ".tgi[1].ni[3].nvs" 18304;
 	setAttr ".tgi[2].tn" -type "string" "Untitled_3";
-	setAttr ".tgi[2].vl" -type "double2" -1950.5984034563733 -725.11622148367894 ;
-	setAttr ".tgi[2].vh" -type "double2" 311.3458850789591 330.340701971084 ;
-	setAttr -s 12 ".tgi[2].ni";
-	setAttr ".tgi[2].ni[0].x" -303.09494018554687;
-	setAttr ".tgi[2].ni[0].y" -93.4775390625;
+	setAttr ".tgi[2].vl" -type "double2" -84.418719160954169 -760.01145702128213 ;
+	setAttr ".tgi[2].vh" -type "double2" 2243.8055961914356 326.37271497156399 ;
+	setAttr -s 14 ".tgi[2].ni";
+	setAttr ".tgi[2].ni[0].x" 905.71429443359375;
+	setAttr ".tgi[2].ni[0].y" -878.5714111328125;
 	setAttr ".tgi[2].ni[0].nvs" 18304;
-	setAttr ".tgi[2].ni[1].x" -918.5037841796875;
-	setAttr ".tgi[2].ni[1].y" -30.157808303833008;
+	setAttr ".tgi[2].ni[1].x" 405.6468505859375;
+	setAttr ".tgi[2].ni[1].y" -585.10687255859375;
 	setAttr ".tgi[2].ni[1].nvs" 18314;
-	setAttr ".tgi[2].ni[2].x" -616.44287109375;
-	setAttr ".tgi[2].ni[2].y" 229.75505065917969;
+	setAttr ".tgi[2].ni[2].x" 402.134521484375;
+	setAttr ".tgi[2].ni[2].y" -153.08956909179687;
 	setAttr ".tgi[2].ni[2].nvs" 18314;
-	setAttr ".tgi[2].ni[3].x" -677.90875244140625;
-	setAttr ".tgi[2].ni[3].y" -214.55543518066406;
+	setAttr ".tgi[2].ni[3].x" 407.40301513671875;
+	setAttr ".tgi[2].ni[3].y" -994.29400634765625;
 	setAttr ".tgi[2].ni[3].nvs" 18314;
-	setAttr ".tgi[2].ni[4].x" -225.08847045898437;
-	setAttr ".tgi[2].ni[4].y" -192.28245544433594;
-	setAttr ".tgi[2].ni[4].nvs" 18314;
-	setAttr ".tgi[2].ni[5].x" -1237.0406494140625;
-	setAttr ".tgi[2].ni[5].y" 198.2662353515625;
+	setAttr ".tgi[2].ni[4].x" 905.71429443359375;
+	setAttr ".tgi[2].ni[4].y" -1171.4285888671875;
+	setAttr ".tgi[2].ni[4].nvs" 18304;
+	setAttr ".tgi[2].ni[5].x" 1350.1942138671875;
+	setAttr ".tgi[2].ni[5].y" -747.23150634765625;
 	setAttr ".tgi[2].ni[5].nvs" 18314;
-	setAttr ".tgi[2].ni[6].x" -915.72015380859375;
-	setAttr ".tgi[2].ni[6].y" 467.97637939453125;
-	setAttr ".tgi[2].ni[6].nvs" 18306;
-	setAttr ".tgi[2].ni[7].x" 17.062189102172852;
-	setAttr ".tgi[2].ni[7].y" -181.10627746582031;
-	setAttr ".tgi[2].ni[7].nvs" 18314;
-	setAttr ".tgi[2].ni[8].x" 255.48745727539062;
-	setAttr ".tgi[2].ni[8].y" 402.53890991210937;
-	setAttr ".tgi[2].ni[8].nvs" 18314;
-	setAttr ".tgi[2].ni[9].x" 259.21286010742187;
-	setAttr ".tgi[2].ni[9].y" -114.04916381835937;
+	setAttr ".tgi[2].ni[6].x" -285.19769287109375;
+	setAttr ".tgi[2].ni[6].y" -159.99201965332031;
+	setAttr ".tgi[2].ni[6].nvs" 18314;
+	setAttr ".tgi[2].ni[7].x" 905.71429443359375;
+	setAttr ".tgi[2].ni[7].y" -980;
+	setAttr ".tgi[2].ni[7].nvs" 18304;
+	setAttr ".tgi[2].ni[8].x" 398.3682861328125;
+	setAttr ".tgi[2].ni[8].y" 292.81356811523437;
+	setAttr ".tgi[2].ni[8].nvs" 18306;
+	setAttr ".tgi[2].ni[9].x" 1653.8106689453125;
+	setAttr ".tgi[2].ni[9].y" 15.584536552429199;
 	setAttr ".tgi[2].ni[9].nvs" 18314;
-	setAttr ".tgi[2].ni[10].x" -293.16055297851562;
-	setAttr ".tgi[2].ni[10].y" 365.33621215820312;
-	setAttr ".tgi[2].ni[10].nvs" 18304;
-	setAttr ".tgi[2].ni[11].x" -437.28225708007812;
-	setAttr ".tgi[2].ni[11].y" -161.11280822753906;
-	setAttr ".tgi[2].ni[11].nvs" 18304;
+	setAttr ".tgi[2].ni[10].x" 1361.873291015625;
+	setAttr ".tgi[2].ni[10].y" 244.48379516601562;
+	setAttr ".tgi[2].ni[10].nvs" 18314;
+	setAttr ".tgi[2].ni[11].x" 1790.59130859375;
+	setAttr ".tgi[2].ni[11].y" -503.91845703125;
+	setAttr ".tgi[2].ni[11].nvs" 18314;
+	setAttr ".tgi[2].ni[12].x" 905.71429443359375;
+	setAttr ".tgi[2].ni[12].y" 227.14285278320312;
+	setAttr ".tgi[2].ni[12].nvs" 18304;
+	setAttr ".tgi[2].ni[13].x" 779.18035888671875;
+	setAttr ".tgi[2].ni[13].y" -98.976608276367188;
+	setAttr ".tgi[2].ni[13].nvs" 18304;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -1164,6 +1178,7 @@ connectAttr "LegFK_Controllers.di" "LegFK_Controls.do";
 connectAttr "transformGeometry3.og" "Thigh_Controller_FKShape.cr";
 connectAttr "transformGeometry2.og" "Knee_Controller_FKShape.cr";
 connectAttr "transformGeometry1.og" "Heel_Controller_FKShape.cr";
+connectAttr "unitConversion6.o" "heelPivotGroup.ry";
 connectAttr "unitConversion3.o" "ToePivotGroup.rx";
 connectAttr "unitConversion4.o" "ToePivotGroup.ry";
 connectAttr "unitConversion2.o" "PeelHeelGroup.rx";
@@ -1171,6 +1186,7 @@ connectAttr "ThighLeft_IK.msg" "LegIKHandle.hsj";
 connectAttr "effector1.hp" "LegIKHandle.hee";
 connectAttr "ikRPsolver.msg" "LegIKHandle.hsv";
 connectAttr "unitConversion1.o" "LegIKHandle.twi";
+connectAttr "unitConversion5.o" "ToeTapGroup.rx";
 connectAttr "HeelLeft_IK.msg" "AnkleIKHandle.hsj";
 connectAttr "effector2.hp" "AnkleIKHandle.hee";
 connectAttr "ikSCsolver.msg" "AnkleIKHandle.hsv";
@@ -1202,8 +1218,12 @@ connectAttr "FootControl.PeelHeel" "PeelHeelMD.i1x";
 connectAttr "PeelHeelMD.ox" "unitConversion2.i";
 connectAttr "FootControl.standTIp" "ToePivotMD.i1x";
 connectAttr "FootControl.TwistToes" "ToePivotMD.i1y";
+connectAttr "FootControl.TwistHeel" "heelPivotMD.i1x";
+connectAttr "FootControl.ToeTap" "ToeTapMD.i1x";
 connectAttr "ToePivotMD.ox" "unitConversion3.i";
 connectAttr "ToePivotMD.oy" "unitConversion4.i";
+connectAttr "ToeTapMD.ox" "unitConversion5.i";
+connectAttr "heelPivotMD.ox" "unitConversion6.i";
 connectAttr "KneeLeft_orientConstraint.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[0].dn"
 		;
 connectAttr "remapValueLeg.msg" "MayaNodeEditorSavedTabsInfo.tgi[0].ni[1].dn";
@@ -1223,15 +1243,17 @@ connectAttr "unitConversion3.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[0].dn";
 connectAttr "ToePivotMD.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[1].dn";
 connectAttr "heelPivotMD.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[2].dn";
 connectAttr "ToeTapMD.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[3].dn";
-connectAttr "ToeTapGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[4].dn";
-connectAttr "FootControl.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[5].dn";
-connectAttr "PeelHeelMD.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[6].dn";
-connectAttr "heelPivotGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[7].dn";
-connectAttr "PeelHeelGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[8].dn";
-connectAttr "ToePivotGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[9].dn";
-connectAttr "unitConversion2.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[10].dn"
+connectAttr "unitConversion5.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[4].dn";
+connectAttr "ToeTapGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[5].dn";
+connectAttr "FootControl.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[6].dn";
+connectAttr "unitConversion4.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[7].dn";
+connectAttr "PeelHeelMD.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[8].dn";
+connectAttr "heelPivotGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[9].dn";
+connectAttr "PeelHeelGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[10].dn";
+connectAttr "ToePivotGroup.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[11].dn";
+connectAttr "unitConversion2.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[12].dn"
 		;
-connectAttr "unitConversion4.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[11].dn"
+connectAttr "unitConversion6.msg" "MayaNodeEditorSavedTabsInfo.tgi[2].ni[13].dn"
 		;
 connectAttr "pasted__multiplyDivide_shoulderLeft1.msg" ":defaultRenderUtilityList1.u"
 		 -na;
